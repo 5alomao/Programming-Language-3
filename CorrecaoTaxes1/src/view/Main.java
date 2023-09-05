@@ -5,18 +5,18 @@ import model.Tax;
 
 public class Main {
 
-	public static void main(String[] args){
+	public static void main(String[] args) throws Exception {
 		// TODO
-		try {
-			Tax IPI = new Tax("IPI", "Imposto Prod. Industrializado", 8);
-			Tax IPI2 = new Tax("ICMS", "Imposto Prod. Industrializado", 8);
-			Product arroz = new Product("Arroz", 100, 30);
-			System.out.println(arroz.addTax(IPI2));
-			System.out.println(arroz.addTax(IPI));
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
-		
+		Tax ipi = new Tax("IPI", "Imposto Prod. Industrializado", 8);
+		Tax iss = new Tax("ISS", "Imposto Prod. Industrializado", 12);
+
+		Product arroz = new Product("Arroz Pilecco", 100, 30);
+
+		arroz.addTax(ipi);
+		arroz.addTax(iss);
+
+		System.out.println(arroz.getName() + "R$: " + arroz.calculateSalePrice());
+
 	}
-	
+
 }

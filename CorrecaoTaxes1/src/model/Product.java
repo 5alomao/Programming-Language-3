@@ -15,40 +15,60 @@ public class Product {
 		setProfit(profit);
 		this.taxes = new ArrayList<>();
 	}
-	
-	public boolean addTax(Tax objTax) throws Exception{
-		
-		if(objTax == null)
-			throw new Exception("Imposto não pode ser nulo.");
-		
-		if(taxes.contains(objTax))
-			return false; 
-		else 
-			taxes.add(objTax);
-		
-		return true;
-		
+
+	public double calculateSalePrice() {
+		double taxSum = 0;
+		for (Tax tax : taxes) {
+			taxSum += tax.calculate(this);
+		}
+
+		double finalCost = this.costPrice + taxSum;
+
+		double finalPrice = finalCost + (finalCost * profit);
+		return finalPrice;
 	}
 
-	private void setProfit(double profit) throws Exception{
-		if(profit <= 0)
+	public boolean addTax(Tax objTax) throws Exception {
+
+		if (objTax == null)
+			throw new Exception("Imposto não pode ser nulo.");
+
+		if (taxes.contains(objTax))
+			return false;
+		else
+			taxes.add(objTax);
+
+		return true;
+
+	}
+
+	public String getName() {
+		return this.name;
+	}
+
+	public double getCostPrice() {
+		return this.costPrice;
+	}
+
+	private void setProfit(double profit) throws Exception {
+		if (profit <= 0)
 			throw new Exception("Margem de lucro inválida.");
-		
-		this.profit = profit/100;
+
+		this.profit = profit / 100;
 	}
 
 	private void setCostPrice(double costPrice) throws Exception {
-		if(costPrice <= 0)
+		if (costPrice <= 0)
 			throw new Exception("Preço de custo inválido.");
-		
+
 		this.costPrice = costPrice;
 	}
 
 	private void setName(String name) throws Exception {
-		if(name == null || name.equals(""))
+		if (name == null || name.equals(""))
 			throw new Exception("Nome inválido.000");
-				
+
 		this.name = name;
 	}
-	
+
 }

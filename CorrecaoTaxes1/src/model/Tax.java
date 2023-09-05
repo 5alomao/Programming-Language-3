@@ -5,49 +5,48 @@ public class Tax {
 	private String name;
 	private double aliquot;
 
-	public Tax(String abbr, String name, double ali) throws Exception{
+	public Tax(String abbr, String name, double ali) throws Exception {
 		setAbbr(abbr);
 		setName(name);
 		setAliquot(ali);
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
-		if(obj == null)
+		if (obj == null)
 			return false;
-		
-		if(!(obj instanceof Tax))
+
+		if (!(obj instanceof Tax))
 			return false;
-		
-		Tax tax = (Tax)obj;
-		
+
+		Tax tax = (Tax) obj;
+
 		return this.abbr.equals(tax.abbr);
 	}
-	
-	public double calculate() {
-		// TODO
-		return 0;
+
+	public double calculate(Product p) {
+		return p.getCostPrice() * aliquot;
 	}
-	
-	private void setAbbr(String abbr) throws Exception{
-		if(abbr == null || abbr.equals(""))
+
+	private void setAbbr(String abbr) throws Exception {
+		if (abbr == null || abbr.equals(""))
 			throw new Exception("Abreviação inválida.");
-				
+
 		this.abbr = abbr;
 	}
 
-	private void setName(String name) throws Exception{
-		if(name == null || name.equals(""))
+	private void setName(String name) throws Exception {
+		if (name == null || name.equals(""))
 			throw new Exception("Nome inválido.");
-				
+
 		this.name = name;
 	}
 
-	private void setAliquot(double aliquot) throws Exception{
-		if(aliquot <= 0)
+	private void setAliquot(double aliquot) throws Exception {
+		if (aliquot <= 0)
 			throw new Exception("Alíquota inválida.");
-		
-		this.aliquot = aliquot/100;
+
+		this.aliquot = aliquot / 100;
 	}
-	
+
 }
