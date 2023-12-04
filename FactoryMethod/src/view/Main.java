@@ -1,14 +1,15 @@
 package view;
 
+import model.Country;
+import model.CountryEmployeeFactory;
 import model.Employee;
 import model.EmployeeFactory;
 import model.EmployeeType;
-import model.br.EmployeeFactoryBR;
 
 public class Main {
 
 	public static void main(String[] args) {
-		EmployeeFactory factory = new EmployeeFactoryBR();
+		EmployeeFactory factory = CountryEmployeeFactory.createEmployeeFactory(Country.BR);
 
 		Employee employee = factory.createEmployee(EmployeeType.PROGRAMMER);
 
