@@ -16,16 +16,15 @@ public class MySQLConnectionFactory {
 
 	// Credenciais
 	static final String USER = "root";
-	static final String PASSWORD = "root1234";
-	
+	static final String PASSWORD = "";
+
 	public static Connection getConnection() throws ModelException {
 		// API JDBC < 3 e Java < 5
 		try {
 			Class.forName(JDBC_DRIVER_NAME);
-			
+
 			// Cria uma conexão com o Banco de Dados
-			return DriverManager.getConnection(
-					DATABASE_URL, USER, PASSWORD);
+			return DriverManager.getConnection(DATABASE_URL, USER, PASSWORD);
 		} catch (ClassNotFoundException e) {
 			throw new ModelException("Driver não encontrado", e);
 		} catch (SQLException e) {
